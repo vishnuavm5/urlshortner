@@ -11,6 +11,12 @@ export async function POST(req: NextRequest) {
 
     const { url } = reqBody;
     const randomBytes = generateCode(10);
+    if (!process.env.URL) {
+      return NextResponse.json(
+        { sucess: false, msg: "No domain url found" },
+        { status: 400 }
+      );
+    }
     const modifiedUrl = `${process.env.URL}/${randomBytes}`;
     const newUrl = new Url({
       url: url,
