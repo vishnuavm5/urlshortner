@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
     const id = searchParams.get("id");
     const res = await Url.findOne({ uniqueCode: id });
     return NextResponse.json({ url: res.url, success: true }, { status: 200 });
-  } catch (err) {
-    console.error(err);
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }

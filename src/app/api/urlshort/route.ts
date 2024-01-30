@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
       { success: true, msg: "successfully url generated", url: modifiedUrl },
       { status: 201 }
     );
-  } catch (err) {
-    console.error(err);
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
